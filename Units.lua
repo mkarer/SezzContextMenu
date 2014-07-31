@@ -292,7 +292,7 @@ local tMenuItems = {
 	{
 		Name = "BtnTrade",
 		Text = Apollo.GetString("ContextMenu_Trade"),
-		Condition = function(self) return (self.tData.unit and self.tData.bIsACharacter and not self.tData.bIsThePlayer); end,
+		Condition = function(self) return (self.tData.unit and self.tData.bIsACharacter and not self.tData.bIsThePlayer and self.tData.unit:GetFaction() == self.tData.tPlayerFaction); end,
 		OnClick = "OnClickUnit",
 		Enabled = function(self)
 			local eCanTradeResult = P2PTrading.CanInitiateTrade(self.tData.unit.__proto__ or self.tData.unit);
@@ -315,7 +315,7 @@ local tMenuItems = {
 	{
 		Name = "BtnInvite",
 		Text = Apollo.GetString("ContextMenu_InviteToGroup"),
-		Condition = function(self) return (self.tData.bIsACharacter and not self.tData.bIsThePlayer and not self.tData.nGroupMemberId and (not self.tData.bInGroup or (self.tData.tMyGroupData.bCanInvite and self.tData.bCanWhisper))); end,
+		Condition = function(self) return (self.tData.bIsACharacter and not self.tData.bIsThePlayer and not self.tData.nGroupMemberId and (not self.tData.bInGroup or (self.tData.tMyGroupData.bCanInvite and self.tData.bCanWhisper)) and (not self.tData.unit or (self.tData.unit and self.tData.unit:GetFaction() == self.tData.tPlayerFaction))); end,
 		OnClick = "OnClickUnit",
 	},
 	{
