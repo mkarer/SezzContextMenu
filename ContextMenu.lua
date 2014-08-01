@@ -549,6 +549,10 @@ function ContextMenu:Position()
 		local tCursor = Apollo.GetMouse();
 		nPosX = tCursor.x - knXCursorOffset;
 		nPosY = tCursor.y - knYCursorOffset;
+
+		if (self.bHasHeader and nPosY + self.wndMain:GetHeight() <= select(2, Apollo.GetScreenSize())) then
+			nPosY = nPosY - self.wndButtonList:GetChildren()[1]:GetHeight();
+		end
 	end
 
 	self.wndMain:Move(nPosX, nPosY, self.wndMain:GetWidth(), self.wndMain:GetHeight());
